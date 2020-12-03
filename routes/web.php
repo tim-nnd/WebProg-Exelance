@@ -30,4 +30,8 @@ Route::get('/register','PageController@register')->name('page.register');
 //Daily
 Route::get('/dailyActivities','PageController@daily')->name('page.daily');
 //ToDoList
+Route::post('/toDoList/{id}','ToDoController@finish')->name('todo.finish');
+Route::delete('/toDoList/{id}','ToDoController@delete')->name('todo.delete');
 Route::get('/toDoList','PageController@toDoList')->name('page.toDo');
+//Add ToDoList
+Route::get('/toDoAdd','PageController@toDoAdd')->name('page.addToDo');

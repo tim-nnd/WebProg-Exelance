@@ -19,6 +19,7 @@ class CreateTodosTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('name', 15);
             $table->date('deadline');
+            $table->boolean('status');
         });
     }
 

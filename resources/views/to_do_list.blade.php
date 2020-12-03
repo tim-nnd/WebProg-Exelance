@@ -13,36 +13,42 @@
             <h4 style="color:black">Your To-Do List<h4>
         </div>
         <div class="card-body">
+            @if( $actives->count() < 1 )
+                <h1>Currently You Have no Task</h1>
+            @endif
             <ul class="list-unstyled list-unstyled-border">
-                {{-- To-Do --}}
-                <li class="media" style="border-bottom: 1px solid gray; padding-bottom:2%">
-                    {{-- Contoh Activity To Do --}}
-                    <div class="media-body">
-                        <label class="font-weight-600" style="font-size:125%">1. Assignment CT</label>
-                        <div class="float-right">
-                            {{-- Centang --}}
-                            <a href="#" class="btn btn-icon btn-success"><i class="fas fa-check rounded-circle"></i></a>
-                            {{-- Silang --}}
-                            <a href="#" class="btn btn-icon btn-danger"><i class="fas fa-times rounded-circle"></i></a>
-                        </div><br>
-                        <span class="text-small text-muted">4 Desember 2020</span>
-                    </div>
-                </li>
-
-                <li class="media" style="padding-bottom:2%">
-                    {{-- Contoh Activity To Do --}}
-                    <div class="media-body">
-                        <label class="font-weight-600" style="font-size:125%">2. Project Lab OOAD</label>
-                        <div class="float-right">
-                            {{-- Centang --}}
-                            <a href="#" class="btn btn-icon btn-success"><i class="fas fa-check rounded-circle"></i></a>
-                            {{-- Silang --}}
-                            <a href="#" class="btn btn-icon btn-danger"><i class="fas fa-times rounded-circle"></i></a>
-                        </div><br>
-                        <span class="text-small text-muted">15 Desember 2020</span>
-                    </div>
-                </li>
+            @foreach ($actives as $t)
+              {{-- To-Do --}}
+              @if($t->deadline >= now() && $t->status == 0)
+              <li class="media" @if(!($t == $actives->last())) style="border-bottom: 1px solid gray; padding-bottom:2%" @endif>
+                  {{-- Contoh Activity To Do --}}
+                  <div class="media-body">
+                      <label class="font-weight-600" style="font-size:125%">{{$t->name}}</label>
+                      <div class="buttons float-right" style="display:flex">
+                          {{-- Centang --}}
+                          <div style="flex:1">
+                          <form action="{{ route('todo.finish',$t->id) }}" method="POST">
+                            @csrf
+                            <button class="btn btn-icon btn-success" type="submit"><i class="fas fa-check rounded-circle"></i></button>
+                          </form></div>
+                          {{-- Silang --}}
+                          <div style="flex:1">
+                          <form action="{{ route('todo.delete',$t->id) }}" id="delete{{ $t->id }}" method="POST">
+                            @csrf
+                            @method('delete')
+                            <button class="btn btn-icon btn-danger" type="submit"><i class="fas fa-times rounded-circle"></i></button>
+                          </form></div>
+                      </div><br>
+                      <span class="text-small text-muted">{{$t->deadline}}</span>
+                  </div>
+              </li>
+              @endif
+            @endforeach
             </ul>
+            {{-- Button untuk Tambahin To Do List --}}
+            <div class="float-right">
+              <a href="{{route('page.addToDo')}}" class="btn btn-primary">Add To-Do</a>
+            </div>
         </div>
       </div>
     </div>
@@ -53,13 +59,15 @@
         </div>
         <div class="card-body">
           <ul class="list-unstyled list-unstyled-border">
-            <li class="media">
-                <img class="mr-3 rounded-circle" width="50" src="{{asset('assets/img/luar/task.jpg')}}" alt="avatar">
-                <div class="media-body">
-                <div class="float-right text-primary">30/10/2020</div>
-                <div class="media-title" style="margin-top:2%">Assignment FLA</div>
-                </div>
-            </li>
+            @foreach ($done as $t)
+              <li class="media">
+                  <img class="mr-3 rounded-circle" width="50" src="{{asset('assets/img/luar/task.jpg')}}" alt="avatar">
+                  <div class="media-body">
+                  <div class="float-right text-primary">{{$t->deadline}}</div>
+                  <div class="media-title" style="margin-top:2%">{{$t->name}}</div>
+                  </div>
+              </li>
+            @endforeach
           </ul>
         </div>
       </div>
