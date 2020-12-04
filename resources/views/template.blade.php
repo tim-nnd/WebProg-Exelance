@@ -1,5 +1,9 @@
 @extends('layout/master')
 
+@section('page-title')
+
+@endsection
+
 @section('content-title')
     <h1>Dashboard</h1>
 @endsection

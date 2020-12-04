@@ -1,5 +1,9 @@
 @extends('layout/master')
 
+@section('page-title')
+To-Do List
+@endsection
+
 @section('content-title')
     <h1 style="margin-left:2%">To-Do List</h1>
 @endsection

@@ -1,5 +1,9 @@
 @extends('layout/master')
 
+@section('page-title')
+    Daily Activities
+@endsection
+
 @section('content-title')
     <h1>Add Daily Activities</h1>
 @endsection

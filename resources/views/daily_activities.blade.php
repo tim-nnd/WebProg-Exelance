@@ -1,5 +1,9 @@
 @extends('layout/master')
 
+@section('page-title')
+Daily Activities
+@endsection
+
 @section('content-title')
     <h1 style="margin-left:2%">Daily Activity</h1>
 @endsection
