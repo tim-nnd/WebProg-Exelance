@@ -12,24 +12,39 @@
             <img src="{{asset('assets/img/luar/dailyHeaderIcon.jpg')}}" height="80%" width="30%" >
             <div class="col">
                 <div><h3>Your Daily Activity<h3></div>
-                <div><a href="#" class="btn btn-lg btn-dark">New Daily</a></div>
+                <div class="row">
+                  <div style="margin-left:4%"><a href="{{route('page.addDaily')}}" class="btn btn-lg btn-dark">New Daily</a></div>
+                  <div style="margin-left:2%"><a href="{{route('page.editDaily')}}" class="btn btn-lg btn-danger">Edit Daily</a></div>
+                </div>
             </div>
         </div>
         <div class="card-body">
+          @if($current->count() < 1)
+          <h3>Nothing left to do</h3>
+          @else
             <ul class="list-unstyled list-unstyled-border">
-                {{-- Contoh Daily --}}
+                {{-- Daily Activity --}}
+                @foreach($current as $a)
                 <li class="media">
-                    {{-- Contoh Activity --}}
-                    <img class="mr-3 rounded-circle" width="50" src="{{asset('assets/img/luar/study.jpg')}}" alt="avatar">
-                    <div class="media-body">
-                    <div class="float-right text-primary">12.30 PM</div>
-                    <div class="media-title">Study</div>
-                    {{-- Deskripsi Gatau Mau pake atau ngak --}}
-                    <span class="text-small text-muted">Yuk Belajar Yuk</span>
-                    </div>
-                </li>
+                  {{-- Contoh Activity --}}
+                      <img class="mr-3 rounded-circle" width="50" src="{{asset('assets/img/luar/daily/'.$a->photo)}}" alt="icon">
+                      <div class="media-body">
+                      <div class="float-right text-primary">{{date('H:i', strtotime($a->time))}} @if($a->time > '12:00') PM @else AM @endif</div>
+                      <div class="media-title">{{$a->name}}</div>
+                      @if(session('edit'))
+                      <form action="{{ route('daily.delete',$a->id) }}" id="delete{{ $a->id }}" method="POST">
+                        @csrf
+                        @method('delete')
+                        <button type="submit" class="btn btn-icon btn-danger float-right" style=""><i class="fas fa-times"></i></button></form>
+                      @endif
+                      <span class="text-small text-muted">{{$a->description}}</span>
+                      </div>
+                  </li>
+                @endforeach
             </ul>
+          @endif
         </div>
+      @if(session('edit')) <a href="{{route('page.finishEdit')}}" class="btn btn-lg btn-success float-right" style="margin:2%">Finish</a> @endif
       </div>
     </div>
     <div class="col-lg-6 col-md-12 col-12 col-sm-12">
@@ -38,22 +53,21 @@
           <h4>Recent Activities</h4>
         </div>
         <div class="card-body">
+        @if($recent->count()<1)
+        <h3>No Recent Activity</h3>
+        @else
           <ul class="list-unstyled list-unstyled-border">
+            @foreach($recent as $r)
             <li class="media">
-                <img class="mr-3 rounded-circle" width="50" src="{{asset('assets/img/luar/cycling.jpg')}}" alt="avatar">
+                <img class="mr-3 rounded-circle" width="50" src="{{asset('assets/img/luar/daily/'.$r->photo)}}" alt="avatar">
                 <div class="media-body">
-                <div class="float-right text-primary">7.00 AM</div>
-                <div class="media-title" style="font-size: 150%; margin-top:1.5%">Olahraga</div>
+                <div class="float-right text-primary">{{date('H:i', strtotime($r->time))}} @if($r->time > '12:00') PM @else AM @endif</div>
+                <div class="media-title" style="font-size: 150%; margin-top:1.5%">{{$r->name}}</div>
                 </div>
             </li>
-            <li class="media">
-                <img class="mr-3 rounded-circle" width="50" src="{{asset('assets/img/luar/breakfast.jpg')}}" alt="avatar">
-                <div class="media-body">
-                <div class="float-right text-primary">8.30 AM</div>
-                <div class="media-title" style="font-size: 150%; margin-top:1.5%">Breakfast</div>
-                </div>
-            </li>
+            @endforeach
           </ul>
+        @endif
         </div>
       </div>
     </div>

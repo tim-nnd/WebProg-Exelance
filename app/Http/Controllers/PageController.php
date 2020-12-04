@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\ToDo;
+use App\Activity;
 
 class PageController extends Controller
 {
@@ -32,15 +33,17 @@ class PageController extends Controller
         if(!Auth::User()){
             return redirect('login');
         }
-        return view('daily_activities');
+        $current = Activity::Where('user_id',Auth::id())->where('time','>',now())->orderBy('time')->get();
+        $recent = Activity::Where('user_id',Auth::id())->where('time','<',now())->orderBy('time')->get();
+        return view('daily_activities',compact('current','recent'));
     }
 
     public function toDoList(){
         if(!Auth::User()){
             return redirect('login');
         }
-        $actives = ToDo::where('user_id',Auth::id())->where('deadline','>=',now())->where('status',0)->get();
-        $done = ToDo::where('user_id',Auth::id())->where('status',1)->get();
+        $actives = ToDo::where('user_id',Auth::id())->where('deadline','>=',today())->where('status',0)->orderBy('deadline')->get();
+        $done = ToDo::where('user_id',Auth::id())->where('deadline','<',today())->orWhere('status',1)->orderBy('deadline')->get();
         return view('to_do_list',compact('actives','done'));
     }
 
@@ -49,5 +52,27 @@ class PageController extends Controller
             return redirect('login');
         }
         return view('add_ToDo');
+    }
+
+    public function dailyAdd(){
+        if(!Auth::User()){
+            return redirect('login');
+        }
+        return view('add_Daily');
+    }
+
+    public function editDaily(){
+        if(!Auth::User()){
+            return redirect('login');
+        }
+        $current = Activity::Where('user_id',Auth::id())->where('time','>',now())->orderBy('time')->get();
+        $recent = Activity::Where('user_id',Auth::id())->where('time','<',now())->orderBy('time')->get();
+        session(['edit' => true]);
+        return view('daily_activities',compact('current','recent'));
+    }
+
+    public function finishEdit(Request $request){
+        $request->session()->forget('edit');
+        return redirect()->route('page.daily');
     }
 }

@@ -20,6 +20,7 @@ class CreateActivitiesTable extends Migration
             $table->string('name', 15);
             $table->string('description');
             $table->string('photo');
+            $table->time('time');
         });
     }
 

@@ -29,9 +29,17 @@ Route::get('/register','PageController@register')->name('page.register');
 //Personal Activity
 //Daily
 Route::get('/dailyActivities','PageController@daily')->name('page.daily');
+//Add Daily
+Route::post('/dailyAdd','DailyController@add')->name('daily.add');
+Route::get('/dailyAdd','PageController@dailyAdd')->name('page.addDaily');
+//Edit Daily
+Route::get('/editDaily','PageController@editDaily')->name('page.editDaily');
+Route::get('/finishEdit','PageController@finishEdit')->name('page.finishEdit');
+Route::delete('/deleteDaily/{id}','DailyController@delete')->name('daily.delete');
 //ToDoList
 Route::post('/toDoList/{id}','ToDoController@finish')->name('todo.finish');
 Route::delete('/toDoList/{id}','ToDoController@delete')->name('todo.delete');
 Route::get('/toDoList','PageController@toDoList')->name('page.toDo');
 //Add ToDoList
+Route::post('/toDoAdd','ToDoController@add')->name('todo.add');
 Route::get('/toDoAdd','PageController@toDoAdd')->name('page.addToDo');

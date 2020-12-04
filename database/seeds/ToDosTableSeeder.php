@@ -21,13 +21,13 @@ class ToDosTableSeeder extends Seeder
             array(
                 'user_id' => '1',
                 'name' => 'Assignment CT',
-                'deadline' => '2020-12-04',
+                'deadline' => '2020-12-15',
                 'status' => false,
             ),
             array(
                 'user_id' => '1',
                 'name' => 'Assignment OOAD',
-                'deadline' => '2020-12-12',
+                'deadline' => '2020-12-21',
                 'status' => false,
             ),
         ));

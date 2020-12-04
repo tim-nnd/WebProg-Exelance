@@ -19,7 +19,6 @@
             <ul class="list-unstyled list-unstyled-border">
             @foreach ($actives as $t)
               {{-- To-Do --}}
-              @if($t->deadline >= now() && $t->status == 0)
               <li class="media" @if(!($t == $actives->last())) style="border-bottom: 1px solid gray; padding-bottom:2%" @endif>
                   {{-- Contoh Activity To Do --}}
                   <div class="media-body">
@@ -42,7 +41,6 @@
                       <span class="text-small text-muted">{{$t->deadline}}</span>
                   </div>
               </li>
-              @endif
             @endforeach
             </ul>
             {{-- Button untuk Tambahin To Do List --}}
@@ -60,6 +58,7 @@
         <div class="card-body">
           <ul class="list-unstyled list-unstyled-border">
             @foreach ($done as $t)
+              @if($t->deadline < date("Y-m-d", mktime(0, 0, 0, date("m") , date("d")-1,date("Y"))) || $t->status == 1)
               <li class="media">
                   <img class="mr-3 rounded-circle" width="50" src="{{asset('assets/img/luar/task.jpg')}}" alt="avatar">
                   <div class="media-body">
@@ -67,6 +66,7 @@
                   <div class="media-title" style="margin-top:2%">{{$t->name}}</div>
                   </div>
               </li>
+              @endif
             @endforeach
           </ul>
         </div>
