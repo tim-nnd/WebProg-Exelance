@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use illuminate\Support\Facades\DB;
 
 class TeamToDosTableSeeder extends Seeder
 {
@@ -11,6 +12,5 @@ class TeamToDosTableSeeder extends Seeder
      */
     public function run()
     {
-        //
     }
 }

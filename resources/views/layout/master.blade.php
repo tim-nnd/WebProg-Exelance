@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
@@ -16,6 +17,20 @@
   <link rel="stylesheet" href="../assets/css/components.css">
 </head>
 
+<style>
+  .teamimg {
+    height: 200px;
+    width: 160px;
+  }
+
+  .links {
+    color: #E09543;
+    font-size: 25px;
+    background-color: transparent;
+    text-decoration: none;
+  }
+</style>
+
 <body>
   <div id="app">
     <div class="main-wrapper">
@@ -26,14 +41,14 @@
       <!-- Main Content -->
       <div class="main-content">
         <section class="section">
-        <div class="section-header">
+          <div class="section-header">
             @yield('content-title')
-        </div>
-            @yield('content-body')
-        <div class="section-body">
-        </div>
+          </div>
+          @yield('content-body')
+          <div class="section-body">
+          </div>
         </section>
-    </div>
+      </div>
       <footer class="main-footer">
         <div class="footer-left">
           Copyright &copy; 2018 <div class="bullet"></div> Design By <a href="https://nauval.in/">Muhamad Nauval Azhar</a>
@@ -63,4 +78,5 @@
 
   <!-- Page Specific JS File -->
 </body>
+
 </html>

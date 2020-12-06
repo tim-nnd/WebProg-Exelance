@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class TeamsTableSeeder extends Seeder
 {
@@ -11,6 +12,11 @@ class TeamsTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('teams')->insert(array(
+            array(
+                'team_img' => 'pizza.png',
+                'team_name' => 'Phizza Team',
+            ),
+        ));
     }
 }
