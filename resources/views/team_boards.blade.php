@@ -14,19 +14,23 @@ Team Boards
 <!-- team not Available -->
 @if($teamdetail->count() < 1) <div class="d-flex flex-wrap justify-content-center">
     <div class="pt-4 pl-4 pr-4 pb-4 container-big">
-        <img class="" src="{{url('/assets/img/luar/noTeam.png')}}" alt="">
-        <div class="text-center">
-            <h3>No Team Available</h3>
-        </div>
+        <!-- to add your team -->
+        <a href="">
+            <img class="" src="{{url('/assets/img/luar/noTeam.png')}}" alt="">
+            <div class="text-center">
+                <h3>Add your Team Here</h3>
+            </div>
+        </a>
     </div>
     </div>
 
     @else
 
-    @foreach($teamdetail as $td)
     <!-- list team -->
     <div class="d-flex flex-wrap justify-content-start">
-        <div class="pt-4 pl-4 pr-4 pb-4 container-big border">
+
+        @foreach($teamdetail as $td)
+        <div class="pt-4 pl-4 pr-4 pb-4 container-big border ml-4">
             <a href="#" class="links">
                 <img class="teamimg" src="{{asset('assets/img/luar/team/'.$td->team->team_img)}}" alt="">
                 <div class="text-center teamname">
@@ -34,8 +38,17 @@ Team Boards
                 </div>
             </a>
         </div>
+        @endforeach
+        <div class="pt-4 pl-4 pr-4 pb-4 container-big border ml-4">
+            <!-- to add your team -->
+            <a href="">
+                <img class="teamimg" src="{{url('/assets/img/luar/noTeam.png')}}" alt="">
+                <div class="text-center">
+                    <h3>Add Team</h3>
+                </div>
+            </a>
+        </div>
     </div>
-    @endforeach
     @endif
 
     @endsection
