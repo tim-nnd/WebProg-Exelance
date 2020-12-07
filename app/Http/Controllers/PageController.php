@@ -8,6 +8,7 @@ use App\ToDo;
 use App\Activity;
 use App\Team;
 use App\TeamDetail;
+use App\Meeting;
 
 class PageController extends Controller
 {
@@ -89,7 +90,22 @@ class PageController extends Controller
 
     public function toBoards()
     {
+        if(!Auth::User()) return redirect('login');
         $teamdetail = TeamDetail::where('user_id', Auth::id())->get();
         return view('team_boards', compact('teamdetail'));
+    }
+
+    public function teamDetails($id)
+    {
+        if(!Auth::User()) return redirect('login');
+        $team = Team::where('id',$id)->first();
+        return view('team_details', compact('team'));
+    }
+
+    public function teamQuestion($id)
+    {
+        if(!Auth::User()) return redirect('login');
+        $meeting = Meeting::where('id',$id)->first();
+        return view('team_question', compact('meeting'));
     }
 }

@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TeamDetailsTableSeeder::class);
         $this->call(TeamToDosTableSeeder::class);
         $this->call(MeetingsTableSeeder::class);
+        $this->call(MeetingDetailsTableSeeder::class);
         $this->call(ResourcesTableSeeder::class);
     }
 }

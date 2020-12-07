@@ -31,7 +31,7 @@ class ActivitiesTableSeeder extends Seeder
                 'user_id' => '1',
                 'name' => 'Sleep',
                 'description' => 'Istirahat',
-                'photo' => 'sleep.jpg',
+                'photo' => 'rest.jpg',
                 'time' => '22:30',
             ),
         ));

@@ -19,6 +19,7 @@ class CreateTeamtodosTable extends Migration
             $table->string('title');
             $table->string('content');
             $table->date('deadline');
+            $table->boolean('status');
         });
     }
 

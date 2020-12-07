@@ -46,3 +46,9 @@ Route::get('/toDoAdd', 'PageController@toDoAdd')->name('page.addToDo');
 
 //Teams - Boards
 Route::get('/boards', 'PageController@toBoards')->name('boards.team');
+//Team Details
+Route::get('/team/{id}', 'PageController@teamDetails')->name('page.teamDetails');
+//Team Question
+Route::post('/qna/{id}', 'TeamController@postReply')->name('team.qnaPostReply');
+Route::get('/qna/{id}', 'PageController@teamQuestion')->name('page.teamQuestion');
+

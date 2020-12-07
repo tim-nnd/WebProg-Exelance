@@ -14,4 +14,12 @@ class Team extends Model
     {
         return $this->hasMany(TeamDetail::class);
     }
+
+    public function todos(){
+        return $this->hasMany(TeamToDo::class);
+    }
+
+    public function meetings(){
+        return $this->hasMany(Meeting::class);
+    }
 }
