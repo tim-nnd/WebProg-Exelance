@@ -9,12 +9,16 @@ use App\Activity;
 use App\Team;
 use App\TeamDetail;
 use App\Meeting;
+use App\User;
 
 class PageController extends Controller
 {
     public function home()
     {
-        return view('home');
+        if(!Auth::User()) return redirect('login');
+
+        $user = User::find(Auth::id());
+        return view('home',compact('user'));
     }
 
     public function login()
@@ -40,8 +44,8 @@ class PageController extends Controller
         if (!Auth::User()) {
             return redirect('login');
         }
-        $current = Activity::Where('user_id', Auth::id())->where('time', '>', now())->orderBy('time')->get();
-        $recent = Activity::Where('user_id', Auth::id())->where('time', '<', now())->orderBy('time')->get();
+        $current = Activity::Where('user_id', Auth::id())->where('time', '>', now()->addHours('7'))->orderBy('time')->get();
+        $recent = Activity::Where('user_id', Auth::id())->where('time', '<', now()->addHours('7'))->orderBy('time')->get();
         return view('daily_activities', compact('current', 'recent'));
     }
 
@@ -76,8 +80,8 @@ class PageController extends Controller
         if (!Auth::User()) {
             return redirect('login');
         }
-        $current = Activity::Where('user_id', Auth::id())->where('time', '>', now())->orderBy('time')->get();
-        $recent = Activity::Where('user_id', Auth::id())->where('time', '<', now())->orderBy('time')->get();
+        $current = Activity::Where('user_id', Auth::id())->where('time', '>', now()->addHours('7'))->orderBy('time')->get();
+        $recent = Activity::Where('user_id', Auth::id())->where('time', '<', now()->addHours('7'))->orderBy('time')->get();
         session(['edit' => true]);
         return view('daily_activities', compact('current', 'recent'));
     }

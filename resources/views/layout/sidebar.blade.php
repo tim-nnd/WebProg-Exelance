@@ -11,7 +11,7 @@
       {{-- Dashboard --}}
       <li class="menu-header">Dashboard</li>
       <li class="nav-item ">
-        <a href="{{route('page.home')}}" class="nav-link "><i class="fas fa-fire"></i><span>Dashboard</span></a>
+        <a href="{{route('page.home')}}" class="nav-link "><i class="fas fa-fire"></i><span>Home</span></a>
       </li>
 
       {{-- Personal Activities --}}

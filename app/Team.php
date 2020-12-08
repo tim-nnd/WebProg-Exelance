@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Team extends Model
 {
-    public $incrementing = false;
     public $timestamps = false;
     protected $table = "teams";
 
@@ -21,5 +20,9 @@ class Team extends Model
 
     public function meetings(){
         return $this->hasMany(Meeting::class);
+    }
+
+    public function teamupdates(){
+        return $this->hasMany(TeamUpdate::class);
     }
 }

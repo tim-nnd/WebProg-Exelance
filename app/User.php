@@ -37,5 +37,23 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public $timestamps = false;
     protected $table = 'users';
+
+    public function activities(){
+        return $this->hasMany(Activity::class);
+    }
+
+    public function todos(){
+        return $this->hasMany(ToDo::class);
+    }
+
+    public function teamdetails(){
+        return $this->hasMany(TeamDetail::class);
+    }
+
+    public function teamupdates(){
+        return $this->hasMany(TeamUpdate::class);
+    }
+
 }
