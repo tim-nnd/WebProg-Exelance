@@ -14,7 +14,7 @@ Home
       <div class="col-lg-3 col-md-6 col-sm-6 col-12">
         <div class="card card-statistic-1">
           <div class="card-icon bg-primary">
-            <i class="far fa-user"></i>
+            <i class="far fas fa-pencil-alt"></i>
           </div>
           <div class="card-wrap">
             <div class="card-header">
@@ -29,7 +29,8 @@ Home
       <div class="col-lg-3 col-md-6 col-sm-6 col-12">
         <div class="card card-statistic-1">
           <div class="card-icon bg-danger">
-            <i class="far fa-newspaper"></i>
+            <img class="mr-3 rounded-circle" width="80%" height="80%" src="{{asset('assets/img/luar/tasklogo.png')}}" alt="avatar" style="margin-left: 7%;margin-bottom:10%">
+            {{-- <i class="far fa-task"></i> --}}
           </div>
           <div class="card-wrap">
             <div class="card-header">
@@ -64,7 +65,7 @@ Home
       <div class="col-lg-3 col-md-6 col-sm-6 col-12">
         <div class="card card-statistic-1">
           <div class="card-icon bg-success">
-            <i class="fas fa-circle"></i>
+            <img class="mr-3 rounded-circle" width="50%" height="60%" src="{{asset('assets/img/luar/clock.png')}}" alt="avatar" style="margin-left: 15%;margin-bottom:10%">
           </div>
           <div class="card-wrap">
             <div class="card-header">
@@ -155,6 +156,9 @@ Home
                 View All
               </a>
             </div> --}}
+            @if($ct == 0) 
+            <h6 class="text-muted" style="text-align: center">None</h6>
+            @endif
           </div>
         </div>
       </div>

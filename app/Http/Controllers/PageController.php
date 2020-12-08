@@ -44,8 +44,8 @@ class PageController extends Controller
         if (!Auth::User()) {
             return redirect('login');
         }
-        $current = Activity::Where('user_id', Auth::id())->where('time', '>', now()->addHours('7'))->orderBy('time')->get();
-        $recent = Activity::Where('user_id', Auth::id())->where('time', '<', now()->addHours('7'))->orderBy('time')->get();
+        $current = Activity::Where('user_id', Auth::id())->where('time', '>', now())->orderBy('time')->get();
+        $recent = Activity::Where('user_id', Auth::id())->where('time', '<', now())->orderBy('time')->get();
         return view('daily_activities', compact('current', 'recent'));
     }
 
@@ -54,9 +54,18 @@ class PageController extends Controller
         if (!Auth::User()) {
             return redirect('login');
         }
+        $this->_changeStatus();
         $actives = ToDo::where('user_id', Auth::id())->where('deadline', '>=', today())->where('status', 0)->orderBy('deadline')->get();
-        $done = ToDo::where('user_id', Auth::id())->where('deadline', '<', today())->orWhere('status', 1)->orderBy('deadline')->get();
+        $done = ToDo::where('user_id', Auth::id())->where('status', 1)->orderBy('deadline')->get();
         return view('to_do_list', compact('actives', 'done'));
+    }
+
+    private function _changeStatus(){
+        $lewat = ToDo::where('deadline','<',today())->where('status', 0)->get();
+        foreach($lewat as $l){
+            $l->status = 1;
+            $l->save();
+        }
     }
 
     public function toDoAdd()
@@ -80,8 +89,8 @@ class PageController extends Controller
         if (!Auth::User()) {
             return redirect('login');
         }
-        $current = Activity::Where('user_id', Auth::id())->where('time', '>', now()->addHours('7'))->orderBy('time')->get();
-        $recent = Activity::Where('user_id', Auth::id())->where('time', '<', now()->addHours('7'))->orderBy('time')->get();
+        $current = Activity::Where('user_id', Auth::id())->orderBy('time')->get();
+        $recent = Activity::Where('user_id', Auth::id())->where('time', '<', now())->orderBy('time')->get();
         session(['edit' => true]);
         return view('daily_activities', compact('current', 'recent'));
     }

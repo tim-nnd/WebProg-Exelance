@@ -15,7 +15,7 @@ class TeamController extends Controller
         $reply->user_id = Auth::id();
         $reply->content = $request->reply;
         $reply->meeting_id = $id;
-        $reply->created_at = now()->addHour('7');
+        $reply->created_at = now();
         $reply->save();
         return redirect()->route('page.teamQuestion',$id);
     }

@@ -17,7 +17,7 @@ class ToDosTableSeeder extends Seeder
                 'user_id' => '1',
                 'name' => 'Assignment FLA',
                 'deadline' => '2020-12-01',
-                'status' => true,
+                'status' => false,
             ),
             array(
                 'user_id' => '1',

@@ -23,7 +23,7 @@ class DailyController extends Controller
     public function delete($id){
         $activity = Activity::find($id);
         $activity->delete();
-        return redirect()->route('page.daily');
+        return redirect()->route('page.editDaily');
     }
 
     private function _validation(Request $request){

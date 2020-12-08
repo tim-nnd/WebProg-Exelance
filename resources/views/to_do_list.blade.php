@@ -16,10 +16,11 @@ To-Do List
         <div class="card-header">
             <h4 style="color:black">Your To-Do List<h4>
         </div>
-        <div class="card-body">
-            @if( $actives->count() < 1 )
-                <h1>Currently You Have no Task</h1>
-            @endif
+        @if( $actives->count() < 1 )
+        <div class="card-body" style="text-align: center  ">
+        <h2>Currently You Have no Task</h2>
+        @else
+            <div class="card-body">
             <ul class="list-unstyled list-unstyled-border">
             @foreach ($actives as $t)
               {{-- To-Do --}}
@@ -47,6 +48,7 @@ To-Do List
               </li>
             @endforeach
             </ul>
+        @endif
             {{-- Button untuk Tambahin To Do List --}}
             <div class="float-right">
               <a href="{{route('page.addToDo')}}" class="btn btn-primary">Add To-Do</a>
@@ -64,7 +66,7 @@ To-Do List
             @foreach ($done as $t)
               @if($t->deadline < date("Y-m-d", mktime(0, 0, 0, date("m") , date("d")-1,date("Y"))) || $t->status == 1)
               <li class="media">
-                  <img class="mr-3 rounded-circle" width="50" src="{{asset('assets/img/luar/task.jpg')}}" alt="avatar">
+                  <img class="mr-3 rounded-circle" width="50" src="{{asset('assets/img/luar/task.png')}}" alt="avatar">
                   <div class="media-body">
                   <div class="float-right text-primary">{{$t->deadline}}</div>
                   <div class="media-title" style="margin-top:2%">{{$t->name}}</div>
