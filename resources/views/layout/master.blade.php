@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
   <!-- CSS Libraries -->
+  
 
   <!-- Template CSS -->
   <link rel="stylesheet" href="../assets/css/style.css">
@@ -21,7 +22,7 @@
   .teamimg {
     height: 200px;
     width: 160px;
-  }
+  } 
 
   .links {
     color: #E09543;
@@ -44,10 +45,11 @@
           <div class="section-header">
             @yield('content-title')
           </div>
-          @yield('content-body')
           <div class="section-body">
+            @yield('content-body')
           </div>
         </section>
+        @yield('modal')
       </div>
       <footer class="main-footer">
         <div class="footer-left">
@@ -77,6 +79,7 @@
   <script src="../assets/js/custom.js"></script>
 
   <!-- Page Specific JS File -->
+  @stack('page-js')
 </body>
 
 </html>

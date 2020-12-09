@@ -138,10 +138,10 @@ Home
                     <div class="media-body">
                       <div class="float-right text-primary">{{\Carbon\Carbon::parse($up->created_at)->format('j M')}}</div>
                       <div class="media-title">
-                      @if(Auth::id() != $user->id) 
-                      {{$up->user->name}}
+                      @if(Auth::id() != $up->user_id) 
+                      {{$up->user->name}} <small class="">({{$ut->team->team_name}})</small>
                       @else
-                        You
+                        You <small class="">({{$ut->team->team_name}})</small>
                       @endif
                       </div>
                     <span class="text-small text-muted">{{$up->message}}</span>
@@ -165,3 +165,4 @@ Home
     </div>
 </section>
 @endsection
+

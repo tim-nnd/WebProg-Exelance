@@ -18,6 +18,7 @@ class CreateResourcesTable extends Migration
             $table->foreign('team_id')->references('id')->on('teams');
             $table->string('title');
             $table->string('content');
+            $table->datetime('created_at');
         });
     }
 

@@ -27,9 +27,9 @@
         <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i> <span>Boards</span></a>
         <ul class="dropdown-menu" style="display: none">
           <li><a class="nav-link" href="{{route('boards.team')}}">Teams</a></li>
-          <li><a class="nav-link" href="">Resources</a></li>
+          {{-- <li><a class="nav-link" href="">Resources</a></li>
           <li><a class="nav-link" href="">To Do</a></li>
-          <li><a class="nav-link" href="">Meeting Question</a></li>
+          <li><a class="nav-link" href="">Meeting Question</a></li> --}}
         </ul>
       </li>
     </ul>

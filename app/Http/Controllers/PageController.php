@@ -10,6 +10,7 @@ use App\Team;
 use App\TeamDetail;
 use App\Meeting;
 use App\User;
+use App\Resource;
 
 class PageController extends Controller
 {
@@ -112,6 +113,7 @@ class PageController extends Controller
     {
         if(!Auth::User()) return redirect('login');
         $team = Team::where('id',$id)->first();
+        session(['team' => $id]);
         return view('team_details', compact('team'));
     }
 
@@ -121,4 +123,5 @@ class PageController extends Controller
         $meeting = Meeting::where('id',$id)->first();
         return view('team_question', compact('meeting'));
     }
+
 }

@@ -51,4 +51,11 @@ Route::get('/team/{id}', 'PageController@teamDetails')->name('page.teamDetails')
 //Team Question
 Route::post('/qna/{id}', 'TeamController@postReply')->name('team.qnaPostReply');
 Route::get('/qna/{id}', 'PageController@teamQuestion')->name('page.teamQuestion');
-
+//Delete member
+Route::delete('/deleteMember/{id}', 'TeamController@deleteMember')->name('team.deleteMember');
+//Post Resources
+Route::post('/postResources', 'TeamController@postResources')->name('team.postResources');
+//Post Task
+Route::post('/postTask', 'TeamController@postTask')->name('team.postTask');
+//Post Question
+Route::post('/postQuestion', 'TeamController@postQuestion')->name('team.postQuestion');

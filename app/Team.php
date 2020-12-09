@@ -25,4 +25,8 @@ class Team extends Model
     public function teamupdates(){
         return $this->hasMany(TeamUpdate::class);
     }
+
+    public function resources(){
+        return $this->hasMany(Resource::class);
+    }
 }

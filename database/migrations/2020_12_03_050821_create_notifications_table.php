@@ -18,6 +18,7 @@ class CreateNotificationsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('message');
+            $table->datetime('created_at');
         });
     }
 
