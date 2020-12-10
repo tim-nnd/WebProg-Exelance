@@ -48,9 +48,9 @@ Exelance
                     <ul class="list-unstyled list-unstyled-border">
                       <?php $ct = 0; ?>
                         @foreach($team->todos->sortBy('deadline') as $td)
-                        <a href="{{route('page.teamToDo',$td->id)}}">
+                        <a href="{{route('page.teamToDo',$td->id)}}" method="GET" style="">
                             <li class="media" @if($ct+1 != $team->todos->count()) style="border-bottom: 1px solid gray; padding-bottom:2%" @endif>
-                                <div class="media-body">
+                                <div class="media-body" style="margin-top: 5%">
                                     <label class="font-weight-600" style="font-size:125%; @if($td->status == 1) color:green @endif" >{{$td->title}}</label>
                                   <br>
                                     <span class="text-small text-muted float-right" >{{$td->deadline}}</span>
