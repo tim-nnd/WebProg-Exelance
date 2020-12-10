@@ -1,7 +1,7 @@
 @extends('layout/master')
 
 @section('page-title')
-Home
+Exelance
 @endsection
 
 @section('content-title')

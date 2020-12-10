@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTeamtodosTable extends Migration
+class CreateInvitationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateTeamtodosTable extends Migration
      */
     public function up()
     {
-        Schema::create('teamtodos', function (Blueprint $table) {
+        Schema::create('invitations', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('team_id');
             $table->foreign('team_id')->references('id')->on('teams');
-            $table->string('title');
-            $table->string('content');
-            $table->date('deadline');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->string('message');
+            $table->datetime('created_at');
             $table->boolean('status');
         });
     }
@@ -31,6 +32,6 @@ class CreateTeamtodosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('teamtodos');
+        Schema::dropIfExists('invitations');
     }
 }

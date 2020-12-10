@@ -11,6 +11,8 @@ use App\TeamDetail;
 use App\Meeting;
 use App\User;
 use App\Resource;
+use App\TeamToDo;
+use App\Invitation;
 
 class PageController extends Controller
 {
@@ -77,6 +79,14 @@ class PageController extends Controller
         return view('add_ToDo');
     }
 
+    public function createTeam()
+    {
+        if (!Auth::User()) {
+            return redirect('login');
+        }
+        return view('create_team');
+    }
+
     public function dailyAdd()
     {
         if (!Auth::User()) {
@@ -109,9 +119,12 @@ class PageController extends Controller
         return view('team_boards', compact('teamdetail'));
     }
 
-    public function teamDetails($id)
+    public function teamDetails(Request $request, $id)
     {
         if(!Auth::User()) return redirect('login');
+
+        if($request->session()->get('team')) $request->session()->forget('team');
+
         $team = Team::where('id',$id)->first();
         session(['team' => $id]);
         return view('team_details', compact('team'));
@@ -122,6 +135,26 @@ class PageController extends Controller
         if(!Auth::User()) return redirect('login');
         $meeting = Meeting::where('id',$id)->first();
         return view('team_question', compact('meeting'));
+    }
+
+    public function teamToDo($id)
+    {
+        if(!Auth::User()) return redirect('login');
+        $tToDo = TeamToDO::where('id',$id)->first();
+        return view('team_toDo', compact('tToDo'));
+    }
+
+    public function invite()
+    {
+        if(!Auth::User()) return redirect('login');
+        return view('team_invite');
+    }
+
+    public function invitation($id)
+    {
+        if(!Auth::User()) return redirect('login');
+        $invitation = Invitation::find($id);
+        return view('invitation',compact('invitation'));
     }
 
 }

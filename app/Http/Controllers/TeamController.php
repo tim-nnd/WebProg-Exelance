@@ -14,6 +14,7 @@ use App\Notification;
 use App\Resource;
 use App\TeamToDo;
 use App\Meeting;
+use App\Invitation;
 
 class TeamController extends Controller
 {
@@ -110,6 +111,101 @@ class TeamController extends Controller
                 'description'  => 'required',
                 'title' => 'required',
             ],
+        );
+    }
+
+    public function finishTask($id){
+        $t = TeamToDo::find($id);
+        $t->status = 1;
+        $t->save();
+        return redirect()->route('page.teamToDo',$id);
+    }
+
+    public function deleteTask(Request $request,$id){
+        $team_id = $request->session()->get('team');
+        $t = TeamToDo::find($id);
+        $t->delete();
+        return redirect()->route('page.teamDetails',$team_id);
+    }
+
+    public function invite(Request $request){
+        $this->_validateInvite($request);
+        $team_id = $request->session()->get('team');
+        $toInvite = User::Where('email',$request->email)->first();
+        if($toInvite){
+            if($toInvite->teamdetails->where('team_id',$team_id)->first()) return redirect()->route('page.invite')->with('failed',$toInvite->name. ' already in the team');
+            $invitation = new Invitation;
+            $invitation->message = $request->message;
+            $invitation->created_at = now();
+            $invitation->user_id = $toInvite->id;
+            $invitation->team_id = $team_id;
+            $invitation->status = 0;
+            $invitation->save();
+            return redirect()->route('page.invite')->with('success','You have invited '. $toInvite->name);
+        }
+        return redirect()->route('page.invite')->with('failed','User not Found');
+    }
+
+    public function accept($id){
+        $invitation = Invitation::find($id);
+        $invitation->status = 1;
+        $td = new TeamDetail;
+        $td->user_id = Auth::id();
+        $td->team_id = $invitation->team_id;
+        $td->role_id = 2;
+        $td->save();
+        $invitation->save();
+        return redirect()->route('boards.team');
+    }
+
+    public function createTeam(Request $request){
+        $this->_validateTeam($request);
+        $t = new Team;
+        $img = $request->file('img');
+        $t->team_name = $request->name;
+        $t->team_img = $img->getClientOriginalName();
+        $img->move('assets/img/luar/team',$img->getClientOriginalName());
+        $t->save();
+
+        $t = Team::all()->sortByDesc('id')->first();
+
+        $td = new TeamDetail;
+        $td->user_id = Auth::id();
+        $td->team_id = $t->id;
+        $td->role_id = 1;
+        $td->save();
+        return redirect()->route('boards.team');
+    }
+
+    public function decline($id){
+        $invitation = Invitation::find($id);
+        $invitation->status = 1;
+        $invitation->save();
+        return redirect()->route('page.home');
+    }
+
+    private function _validateTeam(Request $request){
+        $validation = $request->validate(
+            [
+                'name'  => 'required',
+                'img' => 'required|mimes:jpg,png,jpeg',
+            ],
+            [
+                'name.required'  => 'Team Name cannot be empty',
+                'img.required'  => 'Team Image cannot be empty',
+                'img.mimes'  => 'Team Image only accept jpg, png, jpeg',
+            ]
+        );
+    }
+
+    private function _validateInvite(Request $request){
+        $validation = $request->validate(
+            [
+                'email'  => 'required',
+            ],
+            [
+                'email.required'  => 'Email cannot be empty',
+            ]
         );
     }
 

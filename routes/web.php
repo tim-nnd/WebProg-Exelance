@@ -46,11 +46,21 @@ Route::get('/toDoAdd', 'PageController@toDoAdd')->name('page.addToDo');
 
 //Teams - Boards
 Route::get('/boards', 'PageController@toBoards')->name('boards.team');
+//Create Team
+Route::post('/createTeam', 'TeamController@createTeam')->name('team.createTeam');
+Route::get('/createTeam', 'PageController@createTeam')->name('page.createTeam');
 //Team Details
 Route::get('/team/{id}', 'PageController@teamDetails')->name('page.teamDetails');
 //Team Question
 Route::post('/qna/{id}', 'TeamController@postReply')->name('team.qnaPostReply');
 Route::get('/qna/{id}', 'PageController@teamQuestion')->name('page.teamQuestion');
+//Team ToDo
+Route::delete('/deleteTask/{id}','TeamController@deleteTask')->name('team.deleteTask');
+Route::get('/finishTask/{id}','TeamController@finishTask')->name('team.finishTask');
+Route::get('/teamTask/{id}','PageController@teamToDo')->name('page.teamToDo');
+//Invite Member
+Route::post('/invite','TeamController@invite')->name('team.invite');
+Route::get('/invite','PageController@invite')->name('page.invite');
 //Delete member
 Route::delete('/deleteMember/{id}', 'TeamController@deleteMember')->name('team.deleteMember');
 //Post Resources
@@ -59,3 +69,10 @@ Route::post('/postResources', 'TeamController@postResources')->name('team.postRe
 Route::post('/postTask', 'TeamController@postTask')->name('team.postTask');
 //Post Question
 Route::post('/postQuestion', 'TeamController@postQuestion')->name('team.postQuestion');
+
+//Invitation
+Route::get('/invitation/{id}','PageController@invitation')->name('page.invitation');
+//Accept
+Route::get('/acceptInvite/{id}','TeamController@accept')->name('team.accept');
+//Decline
+Route::get('/declineInvite/{id}','TeamController@decline')->name('team.decline');

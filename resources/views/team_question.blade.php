@@ -1,7 +1,7 @@
 @extends('layout/master')
     
 @section('page-title')
-Team Question
+Exelance
 @endsection
 
 @section('content-title')
@@ -24,7 +24,7 @@ Team Question
                 <div><img alt="image" src="{{asset('assets/img/avatar/avatar-1.png')}}" height="100%" width="50%" style="margin-bottom: 2%"></div>
                 <div>{{$meeting->user->name}}</div>
                 </div>
-                <div c;ass="col-lg-12 col-md-12 col-12 col-sm-12" style=" margin-left: 2%"><p>{{$meeting->content}}</p></div>
+                <div style=" margin-left: 2%"><p>{{$meeting->content}}</p></div>
             </div> 
         </div>
     </div>

@@ -1,7 +1,7 @@
 @extends('layout/master')
 
 @section('page-title')
-
+Exelance
 @endsection
 
 @section('content-title')
@@ -48,6 +48,7 @@
                     <ul class="list-unstyled list-unstyled-border">
                       <?php $ct = 0; ?>
                         @foreach($team->todos->sortBy('deadline') as $td)
+                        <a href="{{route('page.teamToDo',$td->id)}}">
                             <li class="media" @if($ct+1 != $team->todos->count()) style="border-bottom: 1px solid gray; padding-bottom:2%" @endif>
                                 <div class="media-body">
                                     <label class="font-weight-600" style="font-size:125%; @if($td->status == 1) color:green @endif" >{{$td->title}}</label>
@@ -55,6 +56,7 @@
                                     <span class="text-small text-muted float-right" >{{$td->deadline}}</span>
                                 </div>
                             </li>
+                        </a>
                             <?php $ct++; ?>
                         @endforeach
                     </ul>
@@ -121,6 +123,9 @@
             </li>
             @endforeach
         </ul>
+      </div>
+      <div class="modal-footer">
+        <a href="{{route('page.invite')}}" class="btn btn-primary">Invite Member</a>
       </div>
     </div>
   </div>

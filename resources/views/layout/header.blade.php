@@ -12,15 +12,26 @@
     </form>
     <ul class="navbar-nav navbar-right">
     @if(Auth::User())
-      <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
+      <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg @if(Auth::User()->notifications->count() > 1 || Auth::User()->invitations->where('status',0)->count() > 1) beep @endif"><i class="far fa-bell"></i></a>
         <div class="dropdown-menu dropdown-list dropdown-menu-right">
           <div class="dropdown-header">Notifications
           </div>
           <div class="dropdown-list-content dropdown-list-icons">
-            @if(Auth::User()->notifications->count() < 1)
+            @if(Auth::User()->notifications->count() < 1 && Auth::User()->invitations->where('status',0)->count() < 1)
               <div style="text-align: center">
                 <small class="text-muted"> No Notifications Available </small></div>
             @else
+              @foreach(Auth::User()->invitations->where('status',0) as $n)
+                <a href="{{route('page.invitation',$n->id)}}" class="dropdown-item dropdown-item-read">
+                  <div class="dropdown-item-icon bg-info text-white">
+                    <i class="fas fa-user"></i>
+                  </div>
+                  <div class="dropdown-item-desc">
+                    {{$n->message}}
+                  <div class="time text-primary">{{\Carbon\Carbon::parse($n->created_at)->format('j M')}}</div>
+                  </div>
+                </a>
+              @endforeach
               @foreach(Auth::User()->notifications as $n)
                 <a href="#" class="dropdown-item dropdown-item-read">
                   <div class="dropdown-item-icon bg-info text-white">

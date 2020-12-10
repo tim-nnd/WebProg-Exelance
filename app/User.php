@@ -60,4 +60,8 @@ class User extends Authenticatable
         return $this->hasMany(Notification::class);
     }
 
+    public function invitations(){
+        return $this->hasMany(Invitation::class);
+    }
+
 }
